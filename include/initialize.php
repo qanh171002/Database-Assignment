@@ -1,6 +1,6 @@
 <?php
 //define the core paths
-//Define them as absolute peths to make sure that require_once works as expected
+//Define them as absolute paths to make sure that require_once works as expected
 
 //DIRECTORY_SEPARATOR is a PHP Pre-defined constants:
 //(\ for windows, / for Unix)
