@@ -4,17 +4,11 @@
 <head>
 <meta charset="utf-8">
   <title>Lumia - Multipurpose responsive bootstrap website template</title>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- fav and touch icons -->
-  <link rel="shortcut icon" href="assets/ico/favicon.ico">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo web_root;?>plugins/homepage/assets/ico/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo web_root;?>plugins/homepage/assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo web_root;?>plugins/homepage/assets/ico/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="<?php echo web_root;?>plugins/homepage/assets/ico/apple-touch-icon-57-precomposed.png">
 
   <!-- =======================================================
     Theme Name: Lumia
@@ -26,29 +20,39 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <div class="container-fluid">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.php"><i class="icon-home">Home</a>
+      <li class="nav-item"> 
+        <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=lesson"><i class="icon-list-alt">Lesson</a>
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=lesson">Lesson</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=exercises"><i class="icon-list-alt">Exercises</a>
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=exercises">Exercises</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=download"><i class="icon-download">Downloads</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php"><i class="icon-logout">Logout</a>
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=download">Downloads</a>
       </li>
     </ul>
+    <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">User</a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="#">My Information</a>
+  </li>
+    <li><a class="dropdown-item" href="#">My profile</a>
+  </li>
+  <li><a class="dropdown-item" href="#">My course</a>
+  </li>
+  <li><a class="dropdown-item" href="logout.php">Log out</a>
+  </li>
+    </li>
+    </ul>  
   </div>
-</nav>
-
-    <section id="maincontent">
+</div>
+    <section id="maincontent" style="margin-top:80px">
       <div class="container"> 
 <?php check_message(); ?>  
     <?php require_once $content; ?> 
