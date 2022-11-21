@@ -22,9 +22,9 @@
 
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav">
+<div class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid ">
+    <ul class="navbar-nav me-auto" >
       <li class="nav-item">
         <a class="nav-link active" href="#">Active</a>
       </li>
@@ -35,17 +35,27 @@
         <a class="nav-link" href="<?php echo web_root; ?>index.php?q=lesson">Lesson</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=exercises">Exercises</a>
+        <a class="nav-link " href="<?php echo web_root; ?>index.php?q=exercises">Exercises</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<?php echo web_root; ?>index.php?q=download">Download</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Log out</a>
+      
+    </ul>
+
+    <ul class="navbar-nav" >
+      
+      <li class="nav-item  dropdown" >
+        <a class="nav-link dropdown-toggle"  href="logout.php" role="button" data-bs-toggle="dropdown">Log out</a>
+        <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Link</a></li>
+    <li><a class="dropdown-item" href="#">Another link</a></li>
+    <li><a class="dropdown-item" href="#">A third link</a></li>
+  </ul>
       </li>
     </ul>
   </div>
-</nav>
+</div>
 
     <section id="maincontent">
       <div class="container"> 
