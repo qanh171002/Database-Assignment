@@ -8,15 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <!-- styles -->
-  <link href="<?php echo web_root;?>plugins/homepage/assets/css/bootstrap.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/css/prettyPhoto.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/css/flexslider.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/css/style.css" rel="stylesheet">
-  <link href="<?php echo web_root;?>plugins/homepage/assets/color/cyan.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,600,400italic|Open+Sans:400,600,700" rel="stylesheet">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- fav and touch icons -->
   <link rel="shortcut icon" href="assets/ico/favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo web_root;?>plugins/homepage/assets/ico/apple-touch-icon-144-precomposed.png">
@@ -34,47 +27,30 @@
 
 
 <body>
-  <div id="wrapper">
-    <header>
-      <!-- Navbar
-    ================================================== -->
-      <div class="navbar navbar-static-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <!-- logo -->
-            <div class="logo">
-              <a href="index.html"><img src="assets/img/logo.png" alt="" /></a>
-            </div>
-            <!-- end logo -->
-
-            <!-- top menu -->
-            <div class="navigation">
-              <nav>
-                <ul class="nav topnav">
-                  <li class="active">
-                    <a href="index.php"><i class="icon-home"></i> Home </a>
-                  </li>
-                  <li>
-                    <a href="<?php echo web_root; ?>index.php?q=lesson"><i class="icon-list-alt"></i> Lesson</a>
-                  </li>
-                  <li>
-                    <a href="<?php echo web_root; ?>index.php?q=exercises"><i class="icon-list-alt"></i> Exercises</a>
-                  </li>
-                  <li>
-                    <a href="<?php echo web_root; ?>index.php?q=download"><i class="icon-download"></i> Downloads</a>
-                  </li> 
-                  <li>
-                    <a href="logout.php"><i class="icon-logout"></i> Logout</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <!-- end menu -->
-
-          </div>
-        </div>
-      </div>
-    </header>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+      </li>
+     <li class="nav-item">
+        <a href="index.php" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=lesson">Lesson</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=exercises">Exercises</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?php echo web_root; ?>index.php?q=download">Download</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logout.php">Log out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
     <section id="maincontent">
       <div class="container"> 

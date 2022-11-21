@@ -1,5 +1,4 @@
 <!-- <h1><?php echo $title;?></h1> -->
-
 <div class="col-lg-12">  
 <h4>Mandate</h4>
     <p> The Philippine Science High School System is an attached agency of the Department of Science and Technology (DOST).  The Board of Trustees (BOT), with the DOST Secretary as the Chairman, is the highest policy making body of the PSHS System. </p> 
