@@ -5,6 +5,7 @@ if (!isset($_SESSION['StudentID'])) {
   redirect('login.php');
 }
 //quanh
+
 $content='home.php';
 $view = (isset($_GET['q']) && $_GET['q'] != '') ? $_GET['q'] : '';
 switch ($view) { 
