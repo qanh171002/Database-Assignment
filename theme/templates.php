@@ -46,11 +46,11 @@
     <ul class="navbar-nav" >
       
       <li class="nav-item  dropdown" >
-        <a class="nav-link dropdown-toggle"  href="logout.php" role="button" data-bs-toggle="dropdown">Log out</a>
-        <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Link</a></li>
-    <li><a class="dropdown-item" href="#">Another link</a></li>
-    <li><a class="dropdown-item" href="#">A third link</a></li>
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">User</a>
+        <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="userin4.php">User infor</a></li>
+    <li><a class="dropdown-item" href="#">My course</a></li>
+    <li><a class="dropdown-item" href="logout.php">Log out</a></li>
   </ul>
       </li>
     </ul>
