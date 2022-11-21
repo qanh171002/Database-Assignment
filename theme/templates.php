@@ -22,7 +22,7 @@
 
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div class="navbar navbar-expand-sm bg-dark navbar-dark">
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -45,7 +45,7 @@
       </li>
     </ul>
   </div>
-</nav>
+</div>
 
     <section id="maincontent">
       <div class="container"> 
