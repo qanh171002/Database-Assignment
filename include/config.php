@@ -7,8 +7,19 @@ defined('database_name') ? null : define("database_name", "db_elearning") ;
 $this_file = str_replace('\\', '/', __File__) ;
 $doc_root = $_SERVER['DOCUMENT_ROOT'];
 
+// echo $this_file;
+// echo "\n";
+// echo $doc_root;
+
 $web_root =  str_replace (array($doc_root, "include/config.php") , '' , $this_file);
-$server_root = str_replace ('config/config.php' ,'', $this_file);
+
+// echo "\n";
+// echo $web_root;
+
+$server_root = str_replace ('config/config.php' ,'', $this_file); //???
+
+// echo "\n";
+// echo $server_root;
 
 
 define ('web_root' , $web_root);
