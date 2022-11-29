@@ -30,11 +30,13 @@
                     <h5>Thông tin cá nhân</h5>
                     <div class="avatar text-center">
                         <?php
-                            if($value['image']==''){
-                                echo '<img src="../../image/default-avatar.png" class="rounded-circle" width="200px" height="200px">';
-                            }else{
-                                echo '<img src="../../image/'.$value['image'].'" class="rounded-circle" width="200px" height="200px">';
-                            }
+                            // if($value['image']==''){
+                            //     echo '<img src="../../image/default-avatar.png" class="rounded-circle" width="200px" height="200px">';
+                            // }else{
+                            //     echo '<img src="../../image/'.$value['image'].'" class="rounded-circle" width="200px" height="200px">';
+                            // }
+
+                            echo '<img src="avag5.png" class="rounded-circle" width="200px" height="200px">'
                         ?>
                     </div>
                         <form action="../controllers/infoController.php" method="POST" enctype="multipart/form-data">
