@@ -4,6 +4,7 @@ if (!isset($_SESSION['StudentID'])) {
   # code...
   redirect('login.php');
 }
+//quanh
 
 $content='home.php';
 $view = (isset($_GET['q']) && $_GET['q'] != '') ? $_GET['q'] : '';
