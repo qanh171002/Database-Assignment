@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 <style>
     body {
-    background: rgb(255, 255, 0)
+    background: rgb(0, 0, 0)
 }
 
 .form-control:focus {
@@ -21,27 +21,27 @@
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: rgb(0,0,0);
     box-shadow: none;
     border: none
 }
 
 .profile-button:hover {
-    background: #682773
+    background: #333
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: #333;
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: #333;
     box-shadow: none
 }
 
 .back:hover {
-    color: #682773;
+    color: #333;
     cursor: pointer
 }
 
@@ -50,10 +50,10 @@
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: #333;
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px #333
 }
 </style>
 <body>  
