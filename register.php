@@ -1,113 +1,109 @@
-<?php  
-require_once ("include/initialize.php"); 
-if (isset($_SESSION['StudentID'])) {
-  # code...
-  redirect('index.php');
+<?php
+require_once 'define.php';
+require app_root . '/controller/registController.php';
+?>
+<?php
+if (isset($_POST['RegisterAction'])) {
+    $fullName = $_POST['fullName'];
+    $email = $_POST['email'];
+    $dob = $_POST['dob'];
+    $address = $_POST['address'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $role = $_POST['role'];
+    $gender = $_POST['gender'];
+    //$image = $_FILES['image']['name'];
+    //$image_tmp_name = $_FILES['image']['tmp_name'];
+    //$image_folder = '../../image/' . $image;
+    $checkEmail = checkEmail($email);
+    $checkUsername = checkUserName($username);
+
+    if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
+        $message = "Email không hợp lệ";
+    } else if (!$checkEmail) {
+        //header("Location: ../views/regist.php");
+        $message = 'Người dùng đã tồn tại';
+    } else if (!preg_match("/^0([0-9]){9}$/", $phone)) {
+        $message = "Số điện thoại không hợp lệ";
+    } else if (strlen($password) < 6 || strlen($password) > 15) {
+        $message = "Mật khẩu không hợp lệ";
+    } else {
+        $result = insert($fullName, $gender, $email, $dob, $address, $username, $password, $phone, $role);
+        if ($result) {
+            //move_uploaded_file($image_tmp_name, $image_folder);
+            $message = "Đăng ký thành công";
+        } else {
+            $message = "Đăng ký thất bại";
+        }
+    }
 }
 ?>
 
- 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+    <meta charset="utf-8">
+    <title>Đăng ký</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <!-- styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- fav and touch icons -->
 
-    <!-- Icons font CSS-->
-    <link href="<?php echo web_root;?>plugins/registration/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="<?php echo web_root;?>plugins/registration/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-
-    <!-- Vendor CSS-->
-    <link href="<?php echo web_root;?>plugins/registration/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="<?php echo web_root;?>plugins/registration/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="<?php echo web_root;?>plugins/registration/css/main.css" rel="stylesheet" media="all">
 </head>
 
+
 <body>
-    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-1">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h2 class="title">Registration Info</h2>
-                    <form method="POST" action="register.php">
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Firstname" name="FNAME">
-                        </div>
 
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Lastname" name="LNAME">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Address" name="ADDRESS">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="number" placeholder="Phone" name="PHONE">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Username" name="USERNAME">
-                        </div>
-                        <div class="input-group">
-                            <input class="input--style-1" type="password" placeholder="Password" name="PASS">
-                        </div>
+    <div class="container my-5">
+        <div class="login">
+            <div class="login-triangle"></div>
+            <h2 class="login-header">Đăng ký</h2>
 
-                      
-                        <div class="p-t-20">
-                            <button class="btn btn--radius btn--green" type="submit" name="btnRegister">Submit</button>
-                            <a href="login.php">Back to Login</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+
+            <form action="" method="post" class="login-container" enctype="multipart/form-data">
+                <?php
+                if (isset($message)) {
+                    echo '<div class="message">' . $message . '</div>';
+                }
+                ?>
+                <p><input type="text" placeholder="Họ tên" name="fullName" required></p>
+                <label for="gender">Giới tính: </label>
+                <select name="gender">
+                    <option value="F">Nữ</option>
+                    <option value="M">Nam</option>
+                </select>
+                <p><input type="text" placeholder="Email" name="email" required></p>
+                <p><input type="text" placeholder="Số điện thoại" name="phone"></p>
+                <p><input type="date" name="dob"></p>
+                <p><input type="text" placeholder="Địa chỉ" name="address"></p>
+                <p><input type="text" placeholder="Tên đăng nhập" name="username"></p>
+                <p><input type="password" id="password" placeholder="Mật khẩu từ 6 ký tự tới 15 ký tự" name="password" required></p>
+                <p><input type="password" placeholder="Nhập lại mật khẩu" name="repassword" required oninput="check(this)"></p>
+                <label for="role">You are: </label>
+                <select name="role">
+                    <option value="S">Student</option>
+                    <option value="T">Teacher</option>
+                </select>
+                <p><input type="submit" name="RegisterAction" value="Đăng ký"></p>
+                <p> Đã có tài khoản? <a href="login.php"> Đăng nhập ngay</a></p>
+            </form>
         </div>
     </div>
 
-    <!-- Jquery JS-->
-    <script src="<?php echo web_root;?>plugins/registration/vendor/jquery/jquery.min.js"></script>
-    <!-- Vendor JS-->
-    <script src="<?php echo web_root;?>plugins/registration/vendor/select2/select2.min.js"></script>
-    <script src="<?php echo web_root;?>plugins/registration/vendor/datepicker/moment.min.js"></script>
-    <script src="<?php echo web_root;?>plugins/registration/vendor/datepicker/daterangepicker.js"></script>
+    <script language='javascript' type='text/javascript'>
+        function check(input) {
+            if (input.value != document.getElementById('password').value) {
+                input.setCustomValidity('Password Must be Matching.');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+    </script>
 
-    <!-- Main JS-->
-    <script src="js/global.js"></script>
-
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 
 </html>
-<!-- end document-->
-
-
-
-
-<?php 
-if (isset($_POST['btnRegister'])) {
-    # code...  
-
-    $student = New Student(); 
-    $student->Fname         = $_POST['FNAME']; 
-    $student->Lname         = $_POST['LNAME'];
-    $student->Address       = $_POST['ADDRESS']; 
-    $student->MobileNo         = $_POST['PHONE'];  
-    $student->STUDUSERNAME      = $_POST['USERNAME'];
-    $student->STUDPASS      = sha1($_POST['PASS']); 
-    $student->create();  
-
-    message("Your now succefully registered. You can login now!","success");
-    redirect("register.php");
-
-}
-
-?> 

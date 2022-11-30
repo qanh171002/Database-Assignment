@@ -130,6 +130,8 @@ CREATE TABLE `possess` (
 	PRIMARY KEY(`curriCode`,`userID`)
 );
 
+
+
 -- CREATE ROLE student
 -- CREATE ROLE teacher
 -- CREATE ROLE admin
