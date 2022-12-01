@@ -1,9 +1,9 @@
 <?php
 
-require_once('../Database.php');
+require_once(app_root.'/Database.php');
 class User
 {
-        $db = Database::getInstance();
+        
 
 		// public function getListMember(){
 	    //     $sql = "SELECT * FROM user WHERE roleID='2'";
@@ -84,6 +84,3 @@ class User
 		}
 
 	}
-
-
-?>
