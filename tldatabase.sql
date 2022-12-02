@@ -14,7 +14,8 @@ CREATE TABLE `user` (
 	`email` varchar(50) NOT NULL UNIQUE,
 	`fullName` varchar(50) NOT NULL,
 	`dob` date,
-	`phoneNum` char(10) , 
+	`phoneNum` char(10),
+	--  check( phoneNum like'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'), 
     /*Sdt trigger check*/
 	`userRole` char check (`userRole` in ('S','T')),
 	`gender` char check (`gender` in ('M','F'))
@@ -36,7 +37,7 @@ CREATE TABLE `course` (
 	`fee` int not null check(`fee` >= 0) ,
 	`lessonNum` tinyint ,
     /*So bai hoc trigger check*/
-	`fullTime` int not null ,
+	`fullTime` int not null , 
     /*Thoi gian hoan thanh trigger check*/
 	`createTime` datetime 
 );

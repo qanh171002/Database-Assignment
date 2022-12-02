@@ -14,7 +14,7 @@ if (isset($_SESSION['userID'])) {
   <meta charset="utf-8">
   <title>Đăng nhập</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="stylesheet" href="qanh.css">
   <!-- styles -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -36,30 +36,80 @@ if (isset($_POST['LoginAction'])) {
     $_SESSION['user_name'] = $current_user['username'];
     header("Location: index.php");
   } else {
-    $message = 'Tài khoản không hợp lệ, vui lòng nhập lại';
+    $message = 'Invalid account, please try again';
   }
 }
 ?>
 
 <body>
-  <div class="container my-5">
-    <div class="login">
-      <div class="login-triangle"></div>
-      <h2 class="login-header">Đăng nhập</h2>
-      <form action="" method="post" class="login-container">
-        <?php
-        if (isset($message)) {
-          echo '<div class="message">' . $message . '</div>';
-        }
-        ?>
-        <p><input type="text" placeholder="Tên đăng nhập" name="username" required></p>
-        <p><input type="password" placeholder="Mật khẩu" name="password" required></p>
-        <p><input type="submit" name="LoginAction" value="Đăng nhập"></p>
-        <p> Chưa có tài khoản? <a href="register.php"> Đăng ký ngay</a></p>
-      </form>
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form action="" method="post">
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0" style="font-size: 30px ;">LOGIN</p>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Enter a valid username" name="username" required/>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="form3Example4" class="form-control form-control-lg"
+              placeholder="Enter password" name="password" required/>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
+            </div>
+            
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <input type="submit" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;" name="LoginAction" value="Log In">
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="register.php"
+                class="link-danger">Register</a></p>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
+  <div
+    class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2020. All rights reserved.
+    </div>
+    <!-- Copyright -->
 
+    <!-- Right -->
+    <div>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="#!" class="text-white me-4">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="#!" class="text-white">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </div>
+</section>
 </body>
 
 </html>
