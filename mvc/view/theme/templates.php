@@ -9,6 +9,7 @@
   <!-- styles -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- fav and touch icons -->
 
@@ -48,9 +49,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><?= $_SESSION['user_name'] ?></a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">My Information</a>
-              </li>
-              <li><a class="dropdown-item" href="#">My profile</a>
+              <li><a class="dropdown-item" href="index.php?q=info">My profile</a>
               </li>
               <li><a class="dropdown-item" href="index.php?q=mycourse">My course</a>
               </li>
@@ -72,7 +71,7 @@
     </div>
   </div>
   <section id="maincontent">
-    <div class="container">
+    <div class="container bg-body">
 
       <?php require_once $content; ?>
     </div>

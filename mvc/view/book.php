@@ -27,7 +27,7 @@ if ($result) {
                             <!-- The product html template -->
                             <td>
 
-                                <img src="<?php echo web_root . "/book/" . $value['image'] ?>" alt="..." height="150px" width="150px">
+                                <img src="<?php echo asset . "/book/" . $value['image'] ?>" alt="..." height="150px" width="150px">
 
                             </td>
                             <td class="h4"><?php echo $value['curriName'] ?></td>

@@ -6,6 +6,10 @@ session_start();
 
 $view = (isset($_GET['q']) && $_GET['q'] != '') ? $_GET['q'] : '';
 switch ($view) {
+  case 'info':
+    $title = 'My profile';
+    $content = app_root . '/view/userInfo.php';
+    break;
   case 'book':
     $title = 'Reference Book';
     $content = app_root . '/view/book.php';
