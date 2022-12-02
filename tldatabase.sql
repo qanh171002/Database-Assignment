@@ -20,27 +20,46 @@ CREATE TABLE `user` (
 	`userRole` char check (`userRole` in ('S','T')),
 	`gender` char check (`gender` in ('M','F'))
 );
+
+INSERT INTO `user` VALUES
+(1,'trickstar','123456','Nhà ở đâu ai biết', 'a@mail.com', 'Nguyễn Văn A', '2002-11-13','0944272951','S','M'),
+(2,'nhan','123456','Nhà ở đâu ai biết', 'b@mail.com', 'Nguyễn Văn B', '2002-11-14','0944272951','T','M');
+
 CREATE TABLE `student` (
     `studentID` int references `user`(`userID`),
 	PRIMARY KEY (`studentID`)
 );
+
+INSERT INTO `student` VALUES
+(1);
 
 CREATE TABLE `teacher` (
     `teacherID` int references `user`(`userID`),
 	PRIMARY KEY (`teacherID`)
 );
 
+INSERT INTO `teacher` VALUES
+(2);
+
 CREATE TABLE `course` (
     `courseID` char(6) PRIMARY KEY,
     `teacherID` int NOT NULL references `teacher`(`teacherID`) ,
 	`courseName` varchar(50) not null unique, 
+	`description` varchar(5000),
 	`fee` int not null check(`fee` >= 0) ,
 	`lessonNum` tinyint ,
     /*So bai hoc trigger check*/
 	`fullTime` int not null , 
     /*Thoi gian hoan thanh trigger check*/
-	`createTime` datetime 
+	`createTime` datetime,
+	`studentNum` int ,
+	/*So hoc sinh trigger check*/
+	`image` varchar(50)
 );
+
+INSERT INTO `course` VALUES
+('CODE10',2,'Lập trình 1','',2000, 2, 14 , '2002-11-13',0,'laptrinh1.png');
+
 
 CREATE TABLE `education` (
     `studentID` int references `student`(`studentID`),
@@ -88,6 +107,8 @@ CREATE TABLE `lesson` (
 	PRIMARY KEY(`courseID` ,`no`)
 );
 
+INSERT INTO `lesson` VALUES
+('CODE10',1,'Lập trình 1','example.pdf',14 ,'example.pdf');
 
 CREATE TABLE `curriculum` (
     `curriCode` char(9) PRIMARY KEY,
@@ -95,14 +116,15 @@ CREATE TABLE `curriculum` (
 	`curriName` varchar(50) not null,
 	`publishYear` smallint ,
     /*trigger nam xuat ban*/
-	`cost` int check (`cost` >= 0)
+	`cost` int check (`cost` >= 0),
+	`author` varchar(50),
+	`image` varchar(50)
 );
 
-CREATE TABLE `author` (
-    `curriCode` char(9) not null references `curriculum`(`curriCode`),
-    `name` varchar(50) not null,
-	PRIMARY KEY(`curriCode`,`name`)
-);
+INSERT INTO `curriculum` VALUES
+('EBOOK1001','Nhà xuất bản Code trẻ','300 Bài Code Thiếu Nhi', 2011 , 0 ,'Trùm Code', 'book2.jpg'),
+('EBOOK1000','Copyrighted Material','HTML for Babies', 2011 , 10 ,'John C Vanden-Heuvel Sr', 'book1.jpg');
+
 
 CREATE TABLE `attend` (
     `courseID` char(6) not null references `course`(`courseID`),
