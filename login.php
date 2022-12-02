@@ -70,7 +70,6 @@ if (isset($_POST['LoginAction'])) {
                 Remember me
               </label>
             </div>
-            
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">

@@ -18,7 +18,7 @@ if (isset($_SESSION['userID'])) {
                             <!-- The products image -->
                             <a href="index.php?q=course&courseID=<?= $data['courseID'] ?>">
                                 <div class="zoom">
-                                    <img src="<?php echo "../../image/" . $data['image'] ?>" class="card-img-top" alt="...">
+                                    <img src="<?php echo asset."/course_image/" . $data['image'] ?>" class="card-img-top" alt="...">
                                 </div>
                             </a>
                             <!-- The products name -->
