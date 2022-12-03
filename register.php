@@ -20,21 +20,21 @@ if (isset($_POST['RegisterAction'])) {
     $checkUsername = checkUserName($username);
 
     if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
-        $message = "Email không hợp lệ";
+        $message = "Invalid Email";
     } else if (!$checkEmail) {
         //header("Location: ../views/regist.php");
-        $message = 'Người dùng đã tồn tại';
+        $message = 'User already existed';
     } else if (!preg_match("/^0([0-9]){9}$/", $phone)) {
-        $message = "Số điện thoại không hợp lệ";
+        $message = "Invalid phone number";
     } else if (strlen($password) < 6 || strlen($password) > 15) {
-        $message = "Mật khẩu không hợp lệ";
+        $message = "Invalid password";
     } else {
         $result = insert($fullName, $gender, $email, $dob, $address, $username, $password, $phone, $role);
         if ($result) {
             //move_uploaded_file($image_tmp_name, $image_folder);
-            $message = "Đăng ký thành công";
+            $message = "Successful Registration";
         } else {
-            $message = "Đăng ký thất bại";
+            $message = "Registration Failed";
         }
     }
 }
@@ -45,9 +45,9 @@ if (isset($_POST['RegisterAction'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>Đăng ký</title>
+    <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="css/qanh.css">
     <!-- styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -57,44 +57,124 @@ if (isset($_POST['RegisterAction'])) {
 
 
 <body>
-
-    <div class="container my-5">
-        <div class="login">
-            <div class="login-triangle"></div>
-            <h2 class="login-header">Đăng ký</h2>
-
-
-            <form action="" method="post" class="login-container" enctype="multipart/form-data">
+<section>
+<form action="" method="post" class="login-container" enctype="multipart/form-data">
                 <?php
                 if (isset($message)) {
                     echo '<div class="message">' . $message . '</div>';
                 }
                 ?>
-                <p><input type="text" placeholder="Họ tên" name="fullName" required></p>
-                <label for="gender">Giới tính: </label>
-                <select name="gender">
-                    <option value="F">Nữ</option>
-                    <option value="M">Nam</option>
-                </select>
-                <p><input type="text" placeholder="Email" name="email" required></p>
-                <p><input type="text" placeholder="Số điện thoại" name="phone"></p>
-                <p><input type="date" name="dob"></p>
-                <p><input type="text" placeholder="Địa chỉ" name="address"></p>
-                <p><input type="text" placeholder="Tên đăng nhập" name="username"></p>
-                <p><input type="password" id="password" placeholder="Mật khẩu từ 6 ký tự tới 15 ký tự" name="password" required></p>
-                <p><input type="password" placeholder="Nhập lại mật khẩu" name="repassword" required oninput="check(this)"></p>
-                <label for="role">You are: </label>
-                <select name="role">
-                    <option value="S">Student</option>
-                    <option value="T">Teacher</option>
-                </select>
-                <p><input type="submit" name="RegisterAction" value="Đăng ký"></p>
-                <p> Đã có tài khoản? <a href="login.php"> Đăng nhập ngay</a></p>
-            </form>
-        </div>
-    </div>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+          <div class="card-body p-0">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5" style="color: #000;">Account Infomations</h3>
 
-    <script language='javascript' type='text/javascript'>
+                  <div class="row">
+                    <div class="mb-4 pb-2">
+
+                      <div class="form-floating mb-3 mt-3">
+                        <input type="email" id="form3Examplev2`" name="email" class="form-control form-control-lg" required />
+                        <label class="form-label" for="form3Examplev2">Email</label>
+                      </div>
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3 mt-3">
+                      <input type="text" id="form3Examplev4" name="username" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplev4">Username</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="mb-4 pb-2">
+
+                      <div class="form-floating mb-3">
+                        <input type="password" id="form3Examplev5" name="password" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Examplev5">Password</label>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3">
+                      <input type="password" id="form3Examplev4" name="repassword" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplev4">Re-enter password</label>
+                    </div>
+                  </div>
+                   
+                  <div class="col-md-6">
+                    <label for="role">You are: </label>
+                      <select class="select" name="role">
+                        <option value="S">Student</option>
+                        <option value="T">Teacher   </option>
+                      </select>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              
+              </div>
+                    <div class="col-md-6 mb-4 pb-2">
+                    </div>
+                  </div>
+              <div class="col-lg-6 bg-indigo text-dark">
+                <div class="p-5">
+                  <h3 class="fw-normal mb-5">Contact Details</h3>
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3">
+                      <input type="text" id="form3Examplea2" name="fullName" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplea2">Full name</label>
+                    </div>
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                  <label class="form-label" for="form3Examplev2">Gender :</label>
+                    <select class="select" name="gender">
+                      <option value="F">Female</option>
+                      <option value="M">Male</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3">
+                      <input type="tel" id="form3Examplea2" name="phone" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplea2">Phone number</label>
+                    </div>
+                  </div>
+                   
+                  <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3">
+                      <input type="text" id="form3Examplea2" name="address" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplea2">Address</label>
+                    </div>  
+                  </div>
+
+                  <div class="mb-4 pb-2">
+                    <div class="form-floating mb-3">
+                      <input type="date" id="form3Examplea2" name="dob" class="form-control form-control-lg" />
+                      <label class="form-label" for="form3Examplea2">Date of birth</label>
+                    </div>
+                  </div>
+
+                  <p><input type="submit" name="RegisterAction" value="Register"></p>
+                <p> Already have an account? <a href="login.php"> Login now</a></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+  <script language='javascript' type='text/javascript'>
         function check(input) {
             if (input.value != document.getElementById('password').value) {
                 input.setCustomValidity('Password Must be Matching.');
@@ -103,6 +183,7 @@ if (isset($_POST['RegisterAction'])) {
             }
         }
     </script>
+</section>
 
 </body>
 

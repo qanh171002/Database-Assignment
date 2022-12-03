@@ -36,9 +36,10 @@ if (isset($_POST['LoginAction'])) {
     $_SESSION['user_name'] = $current_user['username'];
     header("Location: index.php");
   } else {
-    $message = 'Invalid account, please try again';
+    echo 'Invalid account, please try again';
   }
 }
+
 ?>
 
 <body>
