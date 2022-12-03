@@ -80,7 +80,7 @@ class Course
         return $result;
     }
 
-    public function getCourseOfUser($userid)
+    public function getCourseOfStudent($userid)
     {
         $db = Database::getInstance();
         $sql = "SELECT * FROM course, attend WHERE course.courseID = attend.courseID AND studentID='$userid'";
@@ -88,6 +88,13 @@ class Course
         return $result;
     }
 
+    public function getCourseOfTeacher($userid)
+    {
+        $db = Database::getInstance();
+        $sql = "SELECT * FROM course WHERE teacherID='$userid'";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
     // public function getByCateId($CateId)
     // {
     //     $db = Database::getInstance();

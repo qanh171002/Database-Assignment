@@ -17,6 +17,17 @@ switch ($view) {
   case 'mycourse':
     $title = 'My Course';
     $content = app_root . '/view/myCourse.php';
+    if (isset($_GET['courseID']) && $_GET['courseID'] != '') {
+      require_once(app_root . '/model/course.php');
+      $course = new Course();
+      $result = $course->getById($_GET['courseID']);
+      if ($result) {
+        while ($data = $result->fetch_assoc()) {
+          $title = $data['courseName'];
+        }
+        $content = app_root . '/view/editCourse.php';
+      }
+    }
     break;
   case 'course':
     $title = 'Course';

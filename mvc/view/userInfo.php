@@ -38,20 +38,40 @@ $value = $result->fetch_assoc();
                         <div class="d-flex justify-content-between align-items-center experience"><span>Education</span></div><br>
                         <div class="col-md-12">
                             <span>Primary</span><br>
-                            <input id="pri" type="text" class="form-control" value=""><label for="pri">Institution</label>
+                            <?php
+                            $result = $me->getPrimary($_SESSION['userID']);
+                            while ($data = $result->fetch_assoc()) {
+                            ?>
+                                <input type="text" class="form-control" value="<?php echo $data['inst'] ?>"><label>Institution</label>
+                            <?php } ?>
                         </div> <br>
                         <div class="col-md-12">
                             <span>Secondary</span><br>
-                            <input id="sec" type="text" class="form-control" value=""><label for="sec">Institution</label>
+                            <?php
+                            $result = $me->getSecondary($_SESSION['userID']);
+                            while ($data = $result->fetch_assoc()) {
+                            ?>
+                                <input type="text" class="form-control" value="<?php echo $data['inst'] ?>"><label>Institution</label>
+                            <?php } ?>
                         </div> <br>
                         <div class="col-md-12">
                             <span>High School</span><br>
-                            <input id="ter" type="text" class="form-control" value=""><label for="ter">Institution</label>
+                            <?php
+                            $result = $me->getHigh($_SESSION['userID']);
+                            while ($data = $result->fetch_assoc()) {
+                            ?>
+                                <input type="text" class="form-control" value="<?php echo $data['inst'] ?>"><label>Institution</label>
+                            <?php } ?>
                         </div> <br>
                         <div class="col-md-12">
                             <span>University</span><br>
-                            <input id="uni-inst" type="text" class="form-control" value=""><label for="uni-inst">Institution</label>
-                            <input id="uni-spec" type="text" class="form-control" value=""><label for="uni-spec">Specialization</label>
+                            <?php
+                            $result = $me->getUniversity($_SESSION['userID']);
+                            while ($data = $result->fetch_assoc()) {
+                            ?>
+                                <input type="text" class="form-control" value="<?php echo $data['inst'] ?>"><label>Institution</label>
+                                <input type="text" class="form-control" value="<?php echo $data['spec'] ?>"><label>Specialization</label>
+                            <?php } ?>
                         </div> <br>
                     </div>
                 <?php } else { ?>

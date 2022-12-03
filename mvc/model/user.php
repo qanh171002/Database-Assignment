@@ -5,6 +5,38 @@ class User
 {
 
 
+	public function getPrimary($studentID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM education WHERE studentID='$studentID' AND learnDeg='Primary'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
+
+	public function getSecondary($studentID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM education WHERE studentID='$studentID' AND learnDeg='Secondary'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
+
+	public function getHigh($studentID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM education WHERE studentID='$studentID' AND learnDeg='High'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
+
+	public function getUniversity($studentID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM education WHERE studentID='$studentID' AND learnDeg='University'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
+
 	// public function getListMember(){
 	//     $sql = "SELECT * FROM user WHERE roleID='2'";
 	//     $result = mysqli_query($db->con, $sql);
@@ -27,14 +59,6 @@ class User
 		$result = mysqli_query($db->con, $sql);
 		return $result;
 	}
-
-
-	// public function getMemByEmailAndPassword($email,$password){
-	// 	$db =Database::getInstance();
-	// 	$sql ="SELECT * FROM user WHERE email='$email' AND password = '$password'";
-	// 	$result = mysqli_query($db->con,$sql);
-	// 	return $result;
-	// }
 
 
 	public function updateName($userId, $name)
