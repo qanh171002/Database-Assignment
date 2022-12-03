@@ -37,9 +37,10 @@ if (isset($_POST['LoginAction'])) {
     $_SESSION['userRole']  = $current_user['userRole'];
     header("Location: index.php");
   } else {
-    $message = 'Invalid account, please try again';
+    echo 'Invalid account, please try again';
   }
 }
+
 ?>
 
 <body>
