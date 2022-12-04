@@ -58,10 +58,10 @@
           </li>
         <?php } else { ?>
           <li class="nav-item">
-            <a class="nav-link" href="login.php">Đăng nhập</a>
+            <a class="nav-link" href="login.php">Sign in</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="register.php">Đăng ký</a>
+            <a class="nav-link" href="register.php">Sign up</a>
           </li>
         <?php  }
         ?>
