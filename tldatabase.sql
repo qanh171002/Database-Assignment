@@ -219,22 +219,26 @@ end |
 DELIMITER ;
 
 DELIMITER |
+CREATE trigger check_role BEFORE insert
+on user 
+for EACH ROW
 BEGIN
-     IF(new.userRole = 'S') THEN INSERT INTO student VALUE(new.userID);
-     ELSE INSERT INTO teacher VALUE(new.userID);
+     IF(new.userRole = 'S') THEN INSERT INTO student VALUE(new.userID)
+     ELSE INSERT INTO teacher VALUE(new.userID)
      end if;
 end |
 DELIMITER ;
 
 DELIMITER |
-BEGIN
+CREATE TRIGGER `check_pnum` BEFORE INSERT ON `user`
+ FOR EACH ROW BEGIN
   DECLARE c_Pnum CONDITION FOR SQLSTATE '45000';
   IF( user.phoneNum NOT REGEXP('0[0-9]*9')) THEN
   SIGNAL c_Pnum
   SET MESSAGE_TEXT = 'Invalid phone number';
   END IF;
 END |
-DELIMITER ;
+DELIMITER;
 
 
 
