@@ -8,7 +8,7 @@ if ($result) {
         <div class="container-fluid">
             <div id="heading">
                 <h2><?= $data['courseName'] ?></h2>
-                <p><?= $data['teacherID'] ?></p>
+
                 <p><?= $data['description'] ?></p>
                 <?php
                 if (isset($_SESSION['userID'])) {
@@ -50,8 +50,8 @@ if ($result) {
                                         <td><?= $value['no'] ?></td>
                                         <td><?php echo $value['lessonName'] ?></td>
                                         <td><?php echo $value['duration'] ?> mins</td>
-                                        <td><a href="<?php echo  'exercise/' . $value['exercise'] ?>" target="_blank"><i class="fa-solid fa-code"></i></a></td>
-                                        <td><a href="<?php echo  'lesson/' . $value['exercise'] ?>" target="_blank" class="btn btn-primary stretched-link">View Lesson</a></td>
+                                        <td><a href="<?php echo  asset . '/exercise/' . $value['exercise'] ?>" target="_blank"><i class="fa-solid fa-code"></i></a></td>
+                                        <td><a href="<?php echo  asset . '/lesson/' . $value['lessonSrc'] ?>" target="_blank" class="btn btn-primary stretched-link">View Lesson</a></td>
                                     </tr>
 
                             <?php

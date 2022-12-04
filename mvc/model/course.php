@@ -95,6 +95,30 @@ class Course
         $result = mysqli_query($db->con, $sql);
         return $result;
     }
+
+    public function createCourse($courseID, $userid, $courseName, $des, $fee, $image)
+    {
+        $db = Database::getInstance();
+        $createTime = date("Y-m-d h:i:sa");
+        $sql = "INSERT INTO course (courseID, teacherID, courseName, description, fee, createTime,image) VALUES ('$courseID','$userid','$courseName','$des','$fee','$createTime','$image')";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
+    public function addLesson($courseID, $lessonName, $duration, $content, $exercise)
+    {
+        $db = Database::getInstance();
+        $sql = "SELECT * FROM course WHERE courseID='$courseID'";
+        $result = mysqli_query($db->con, $sql);
+        if (mysqli_num_rows($result) <= 0) return false;
+        $lessonNum = null;
+        while ($data = $result->fetch_assoc()) $lessonNum = $data['lessonNum'];
+        echo $lessonNum;
+        $lessonNum = $lessonNum + 1;
+        $sql = "INSERT INTO lesson VALUES ('$courseID','$lessonNum','$lessonName','$duration','$content','$exercise')";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
     // public function getByCateId($CateId)
     // {
     //     $db = Database::getInstance();

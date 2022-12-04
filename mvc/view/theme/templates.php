@@ -16,12 +16,17 @@
 </head>
 
 <body>
-  <div class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+  <div class="navbar navbar-expand-sm navbar-light" sticky-top" style="background-color: #e3f2fd;">
     <div class="container-fluid ">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="index.php">Yes Learning</a>
+          <a class="nav-link active" href="index.php">
+
+            <img src="logo.png" alt="YES LEARNING" width="60px" height="40px">
+          </a>
         </li>
+      </ul>
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a href="index.php" class="nav-link">Home</a>
         </li>
@@ -41,7 +46,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <i class="fa-regular fa-bell" style="color: white"></i>
+            <i class="fa-regular fa-bell"></i>
           </a>
         </li>
         <?php

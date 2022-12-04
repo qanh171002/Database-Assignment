@@ -61,12 +61,12 @@ CREATE TABLE `course` (
 	`courseName` varchar(50) not null unique,
 	`description` varchar(5000),
 	`fee` int not null check(`fee` >= 0),
-	`lessonNum` tinyint,
+	`lessonNum` tinyint DEFAULT 0,
 	/*So bai hoc trigger check*/
-	`fullTime` int not null,
+	`fullTime` int not null DEFAULT 0,
 	/*Thoi gian hoan thanh trigger check*/
 	`createTime` datetime,
-	`studentNum` int,
+	`studentNum` int DEFAULT 0,
 	/*So hoc sinh trigger check*/
 	`image` varchar(50)
 );
@@ -205,13 +205,6 @@ CREATE TABLE `possess` (
 	PRIMARY KEY(`curriCode`, `userID`)
 );
 -- create PROCEDURE if not EXISTS print
-DELIMITER | CREATE trigger check_lnum BEFORE
-insert on lesson for EACH row BEGIN
-set @courseid = new.courseID;
-UPDATE course
-set lessonNum = lessonNum + 1
-where courseID = @courseid;
-end | DELIMITER;
 -- CREATE ROLE student
 -- CREATE ROLE teacher
 -- CREATE ROLE admin
