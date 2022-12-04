@@ -15,7 +15,6 @@ CREATE TABLE `user` (
 	`fullName` varchar(50) NOT NULL,
 	`dob` date,
 	`phoneNum` char(10),
-	--  check( phoneNum like'[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'), 
     /*Sdt trigger check*/
 	`userRole` char check (`userRole` in ('S','T')),
 	`gender` char check (`gender` in ('M','F'))
@@ -198,7 +197,7 @@ insert on education
 for EACH ROW
 BEGIN
      DECLARE c_year CONDITION FOR SQLSTATE '45000';
-     IF(new.finish < education.start OR new.finish < year(curdate())) THEN
+     IF(new.finish < education.start OR new.finish > year(curdate())) THEN
         SIGNAL c_year
 		SET MESSAGE_TEXT = 'invalid finish year';
         end if;
@@ -223,8 +222,8 @@ CREATE trigger check_role BEFORE insert
 on user 
 for EACH ROW
 BEGIN
-     IF(new.userRole = 'S') THEN INSERT INTO student VALUE(new.userID)
-     ELSE INSERT INTO teacher VALUE(new.userID)
+     IF(new.userRole = 'S') THEN INSERT INTO student VALUE(new.userID);
+     ELSE INSERT INTO teacher VALUE(new.userID);
      end if;
 end |
 DELIMITER ;
@@ -238,7 +237,7 @@ CREATE TRIGGER `check_pnum` BEFORE INSERT ON `user`
   SET MESSAGE_TEXT = 'Invalid phone number';
   END IF;
 END |
-DELIMITER;
+
 
 
 
