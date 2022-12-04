@@ -153,11 +153,10 @@ CREATE TABLE `possess` (
 	PRIMARY KEY(`curriCode`,`userID`)
 );
 
-drop trigger if EXISTS check_lnum
 
 DELIMITER |
 
-CREATE trigger if not EXISTS check_lnum BEFORE
+CREATE trigger check_lnum BEFORE
 insert on lesson 
 for EACH row 
 BEGIN
