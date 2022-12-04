@@ -79,7 +79,7 @@ if ($result) {
                             }
                             ?>
                             <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourse"><span><i class="fa fa-plus"></i>&nbsp;Add Course</span></button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCourse"><span><i class="fa fa-plus"></i>&nbsp;Add Lesson</span></button>
                                 <div class="mb-3"></div>
                                 <div class="modal fade" id="addCourse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addCourseLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">

@@ -204,7 +204,65 @@ CREATE TABLE `possess` (
 	`userID` int not null references `user`(`userID`),
 	PRIMARY KEY(`curriCode`, `userID`)
 );
--- create PROCEDURE if not EXISTS print
+-- drop trigger if EXISTS check_lnum
+DELIMITER | CREATE trigger if not EXISTS check_lnum BEFORE
+insert on lesson for EACH row BEGIN
+set @courseid = new.courseID;
+set @time = new.duration;
+UPDATE course
+set lessonNum = lessonNum + 1,
+	fullTime = fullTime + @time
+where courseID = @courseid;
+end | DELIMITER;
+DELIMITER | CREATE trigger check_Snum BEFORE
+insert on attend for EACH row BEGIN
+set @courseid = new.courseID;
+UPDATE course
+set studentNum = studentNum + 1
+where courseID = @courseID;
+end | DELIMITER;
+DELIMITER | CREATE trigger check_Syear BEFORE
+insert on education for EACH ROW BEGIN
+DECLARE c_year CONDITION FOR SQLSTATE '45000';
+IF(
+	new.start < 1945
+	OR new.start > year(curdate())
+) THEN SIGNAL c_year
+SET MESSAGE_TEXT = 'invalid start year';
+end if;
+end | DELIMITER;
+DELIMITER | CREATE trigger check_Fyear BEFORE
+insert on education for EACH ROW BEGIN
+DECLARE c_year CONDITION FOR SQLSTATE '45000';
+IF(
+	new.finish < education.start
+	OR new.finish < year(curdate())
+) THEN SIGNAL c_year
+SET MESSAGE_TEXT = 'invalid finish year';
+end if;
+end | DELIMITER;
+DELIMITER | CREATE trigger check_Pyear BEFORE
+insert on curriculum for EACH ROW BEGIN
+DECLARE c_year CONDITION FOR SQLSTATE '45000';
+IF(
+	new.publishYear < 2010
+	OR new.publishYear > year(curdate())
+) THEN SIGNAL c_year
+SET MESSAGE_TEXT = 'invalid publish year';
+end if;
+end | DELIMITER;
+DELIMITER | BEGIN IF(new.userRole = 'S') THEN
+INSERT INTO student VALUE(new.userID);
+ELSE
+INSERT INTO teacher VALUE(new.userID);
+end if;
+end | DELIMITER;
+DELIMITER | BEGIN
+DECLARE c_Pnum CONDITION FOR SQLSTATE '45000';
+IF(user.phoneNum NOT REGEXP('0[0-9]*9')) THEN SIGNAL c_Pnum
+SET MESSAGE_TEXT = 'Invalid phone number';
+END IF;
+END | DELIMITER;
 -- CREATE ROLE student
 -- CREATE ROLE teacher
 -- CREATE ROLE admin

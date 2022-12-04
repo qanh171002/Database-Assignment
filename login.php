@@ -82,6 +82,11 @@ if (isset($_POST['LoginAction'])) {
       </div>
     </div>
 
+    <!-- Right -->
+
+    <!-- Right -->
+
+  </section>
 </body>
 
 </html>
