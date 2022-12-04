@@ -51,7 +51,7 @@ if ($result) {
                                         <td><?php echo $value['lessonName'] ?></td>
                                         <td><?php echo $value['duration'] ?> mins</td>
                                         <td><a href="<?php echo  asset . '/exercise/' . $value['exercise'] ?>" target="_blank"><i class="fa-solid fa-code"></i></a></td>
-                                        <td><a href="<?php echo  asset . '/lesson/' . $value['lessonSrc'] ?>" target="_blank" class="btn btn-primary stretched-link">View Lesson</a></td>
+                                        <td><a href="<?php echo  asset . '/lesson/' . $value['lessonSrc'] ?>" target="_blank" class="btn btn-primary">View Lesson</a></td>
                                     </tr>
 
                             <?php
@@ -62,6 +62,25 @@ if ($result) {
                     </table>
                 </div>
                 <!--end table-->
+            </div>
+
+            <div id="book-field">
+                <h4>Reference Books</h4>
+                <div class="row">
+                    <?php
+                    $bookList = $course->getBook($_GET['courseID']);
+                    if ($bookList) {
+                        while ($value  = $bookList->fetch_assoc()) {
+                    ?>
+                            <div class="col-2">
+                                <img src="<?php echo asset . '/book/' . $value['image'] ?>" alt="<?php echo asset . '/book/' . $value['curriName'] ?>" width="150px" height="200px">
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                </div>
+
             </div>
         </div>
 <?php

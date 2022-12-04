@@ -69,7 +69,7 @@ if ($result) {
                                         <td><?php echo $value['lessonName'] ?></td>
                                         <td><?php echo $value['duration'] ?> mins</td>
                                         <td><a href=" <?php echo  asset . '/exercise/' . $value['exercise'] ?>" target="_blank"><i class="fa-solid fa-code"></i></a></td>
-                                        <td><a href="<?php echo  asset . '/lesson/' . $value['lessonSrc'] ?>" target="_blank" class="btn btn-primary stretched-link">View Lesson</a></td>
+                                        <td><a href="<?php echo  asset . '/lesson/' . $value['lessonSrc'] ?>" target="_blank" class="btn btn-primary">View Lesson</a></td>
 
 
                                     </tr>

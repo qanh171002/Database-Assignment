@@ -77,7 +77,7 @@ VALUES (
 		'Lập trình 1',
 		'',
 		2000,
-		2,
+		1,
 		14,
 		'2002-11-13',
 		0,
@@ -103,6 +103,14 @@ CREATE TABLE `education` (
 		`inst`
 	)
 );
+
+INSERT INTO education VALUES 
+(1,'Primary',2008,2013,'','Trường Tiểu học HT2'), 
+(1,'Secondary',2013,2017,'','Trường THCS HV'),
+(1,'High',2017,2020,'','Trường THPT LVC'),
+(1,'University',2020,2026,'Computer Science','Trường ĐHBK TPHCM')
+;
+
 CREATE TABLE `certificate` (
 	`code` char(9) PRIMARY KEY,
 	`studentID` int not null references `student`(`studentID`),
@@ -122,19 +130,27 @@ CREATE TABLE `degree` (
 		`institution`
 	)
 );
+
+INSERT INTO degree VALUES 
+(2,'PhD','Database','Trường ĐHBK TPHCM');
+
 CREATE TABLE `experience` (
 	`teacherID` int references `teacherID`(`teacherID`),
 	`place` varchar(100) not null,
 	`numYears` tinyint not null check (`numYears` >= 2),
 	PRIMARY KEY (`teacherID`, `place`, `numYears`)
 );
+
+INSERT INTO experience VALUES 
+(2,'Trường ĐHBK TPHCM',5);
+
 CREATE TABLE `lesson` (
 	`courseID` char(6) not null references `course`(`courseID`),
 	`no` tinyint,
 	`lessonName` varchar(50) not null,
-	`exercise` varchar(30),
+	`exercise` varchar(50),
 	`duration` tinyint not null check (`duration` >= 0),
-	`lessonSrc` varchar(30) not null,
+	`lessonSrc` varchar(50) not null,
 	PRIMARY KEY(`courseID`, `no`)
 );
 INSERT INTO `lesson`
@@ -199,70 +215,110 @@ CREATE TABLE `use` (
 	`curriCode` char(9) not null references `curriCode`(`curriculum`),
 	PRIMARY KEY(`courseID`, `curriCode`)
 );
+
+INSERT INTO `use`
+VALUES (
+		'CODE10',
+		'EBOOK1001'
+	),
+	(
+		'CODE10',
+		'EBOOK1000'
+	);
+
 CREATE TABLE `possess` (
 	`curriCode` char(9) not null references `curriculum`(`curriCode`),
 	`userID` int not null references `user`(`userID`),
 	PRIMARY KEY(`curriCode`, `userID`)
 );
--- drop trigger if EXISTS check_lnum
-DELIMITER | CREATE trigger if not EXISTS check_lnum BEFORE
-insert on lesson for EACH row BEGIN
-set @courseid = new.courseID;
-set @time = new.duration;
-UPDATE course
-set lessonNum = lessonNum + 1,
-	fullTime = fullTime + @time
-where courseID = @courseid;
-end | DELIMITER;
-DELIMITER | CREATE trigger check_Snum BEFORE
-insert on attend for EACH row BEGIN
-set @courseid = new.courseID;
-UPDATE course
-set studentNum = studentNum + 1
-where courseID = @courseID;
-end | DELIMITER;
-DELIMITER | CREATE trigger check_Syear BEFORE
-insert on education for EACH ROW BEGIN
-DECLARE c_year CONDITION FOR SQLSTATE '45000';
-IF(
-	new.start < 1945
-	OR new.start > year(curdate())
-) THEN SIGNAL c_year
-SET MESSAGE_TEXT = 'invalid start year';
-end if;
-end | DELIMITER;
-DELIMITER | CREATE trigger check_Fyear BEFORE
-insert on education for EACH ROW BEGIN
-DECLARE c_year CONDITION FOR SQLSTATE '45000';
-IF(
-	new.finish < education.start
-	OR new.finish < year(curdate())
-) THEN SIGNAL c_year
-SET MESSAGE_TEXT = 'invalid finish year';
-end if;
-end | DELIMITER;
-DELIMITER | CREATE trigger check_Pyear BEFORE
-insert on curriculum for EACH ROW BEGIN
-DECLARE c_year CONDITION FOR SQLSTATE '45000';
-IF(
-	new.publishYear < 2010
-	OR new.publishYear > year(curdate())
-) THEN SIGNAL c_year
-SET MESSAGE_TEXT = 'invalid publish year';
-end if;
-end | DELIMITER;
-DELIMITER | BEGIN IF(new.userRole = 'S') THEN
-INSERT INTO student VALUE(new.userID);
-ELSE
-INSERT INTO teacher VALUE(new.userID);
-end if;
-end | DELIMITER;
-DELIMITER | BEGIN
-DECLARE c_Pnum CONDITION FOR SQLSTATE '45000';
-IF(user.phoneNum NOT REGEXP('0[0-9]*9')) THEN SIGNAL c_Pnum
-SET MESSAGE_TEXT = 'Invalid phone number';
-END IF;
-END | DELIMITER;
+
+INSERT INTO `possess`
+VALUES (
+		'EBOOK1001',
+		1
+	),
+	(
+		'EBOOK1000',
+		2
+	);
+
+DELIMITER |
+
+CREATE trigger check_lnum BEFORE
+insert on lesson 
+for EACH row 
+BEGIN
+	set @courseid = new.courseID;
+	set @time = new.duration;
+	UPDATE course set lessonNum = lessonNum + 1, fullTime = fullTime + @time where courseID = @courseid;
+end |
+
+DELIMITER ;
+
+DELIMITER |
+
+CREATE trigger check_Snum BEFORE 
+insert on attend
+for EACH row
+BEGIN
+   set @courseid = new.courseID;
+   UPDATE course set studentNum = studentNum + 1 where courseID = @courseID;
+end |
+
+DELIMITER ;
+
+DELIMITER |
+CREATE trigger check_Syear BEFORE 
+insert on education
+for EACH ROW
+BEGIN
+     DECLARE c_year CONDITION FOR SQLSTATE '45000';
+     IF(new.start < 1945 OR new.start > year(curdate())) THEN
+        SIGNAL c_year
+		SET MESSAGE_TEXT = 'invalid start year';
+        end if;
+end |
+DELIMITER ;
+
+DELIMITER |
+CREATE trigger check_Fyear BEFORE 
+insert on education
+for EACH ROW
+BEGIN
+     DECLARE c_year CONDITION FOR SQLSTATE '45000';
+     IF(new.finish < education.start OR new.finish < year(curdate())) THEN
+        SIGNAL c_year
+		SET MESSAGE_TEXT = 'invalid finish year';
+        end if;
+end |
+DELIMITER ;
+
+DELIMITER |
+CREATE trigger check_Pyear BEFORE 
+insert on curriculum
+for EACH ROW
+BEGIN
+     DECLARE c_year CONDITION FOR SQLSTATE '45000';
+     IF(new.publishYear < 2010 OR new.publishYear > year(curdate())) THEN
+        SIGNAL c_year
+		SET MESSAGE_TEXT = 'invalid publish year';
+        end if;
+end |
+DELIMITER ;
+
+DELIMITER |
+CREATE trigger check_role AFTER insert
+on user 
+for EACH ROW
+BEGIN
+     IF(new.userRole = 'S') THEN INSERT INTO student VALUE(new.userID);
+     ELSE INSERT INTO teacher VALUE(new.userID);
+     end if;
+end |
+DELIMITER ;
+
+
+
 -- CREATE ROLE student
 -- CREATE ROLE teacher
 -- CREATE ROLE admin

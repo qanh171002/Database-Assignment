@@ -3,7 +3,21 @@
 require_once(app_root . '/Database.php');
 class User
 {
+	public function getDegree($teacherID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM degree WHERE teacherID='$teacherID'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
 
+	public function getExperience($teacherID)
+	{
+		$db = Database::getInstance();
+		$sql = "SELECT * FROM experience WHERE teacherID='$teacherID'";
+		$result = mysqli_query($db->con, $sql);
+		return $result;
+	}
 
 	public function getPrimary($studentID)
 	{
@@ -61,46 +75,10 @@ class User
 	}
 
 
-	public function updateName($userId, $name)
+	public function updateUserInfo($id, $fullName, $address, $bdate, $phoneNum)
 	{
 		$db = Database::getInstance();
-		$sql = "UPDATE user SET fullName = '$name' WHERE userID='$userId'";
-		$result = mysqli_query($db->conn, $sql);
-		return $result;
-	}
-
-
-
-	public function updateEmail($userId, $email)
-	{
-		$db = Database::getInstance();
-		$sql = "UPDATE user SET email = '$email' WHERE id='$userId'";
-		$result = mysqli_query($db->con, $sql);
-		return $result;
-	}
-
-
-	public function updatePhone($userId, $phone)
-	{
-		$db = Database::getInstance();
-		$sql = "UPDATE user SET phoneNum = '$phone' WHERE id='$userId'";
-		$result = mysqli_query($db->con, $sql);
-		return $result;
-	}
-
-	public function updateDob($userId, $dob)
-	{
-		$db = Database::getInstance();
-		$sql = "UPDATE user SET dob = '$dob' WHERE id='$userId'";
-		$result = mysqli_query($db->con, $sql);
-		return $result;
-	}
-
-
-	public function updateAddress($userId, $address)
-	{
-		$db = Database::getInstance();
-		$sql = "UPDATE user SET address = '$address' WHERE id='$userId'";
+		$sql = "UPDATE user SET fullName='$fullName', address='$address', dob='$bdate', phoneNum=$phoneNum WHERE userID='$id'";
 		$result = mysqli_query($db->con, $sql);
 		return $result;
 	}

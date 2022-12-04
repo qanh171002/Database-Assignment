@@ -80,6 +80,14 @@ class Course
         return $result;
     }
 
+    public function getBook($id)
+    {
+        $db = Database::getInstance();
+        $sql = "SELECT * FROM `use` INNER JOIN curriculum ON `use`.curriCode = curriculum.curriCode WHERE courseID='$id' ";
+        $result = mysqli_query($db->con, $sql);
+        return $result;
+    }
+
     public function getCourseOfStudent($userid)
     {
         $db = Database::getInstance();
@@ -115,7 +123,7 @@ class Course
         while ($data = $result->fetch_assoc()) $lessonNum = $data['lessonNum'];
         echo $lessonNum;
         $lessonNum = $lessonNum + 1;
-        $sql = "INSERT INTO lesson VALUES ('$courseID','$lessonNum','$lessonName','$duration','$content','$exercise')";
+        $sql = "INSERT INTO lesson (courseID, no, lessonName, duration, lessonSrc,exercise) VALUES ('$courseID','$lessonNum','$lessonName','$duration','$content','$exercise')";
         $result = mysqli_query($db->con, $sql);
         return $result;
     }

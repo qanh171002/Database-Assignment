@@ -58,6 +58,8 @@
               </li>
               <li><a class="dropdown-item" href="index.php?q=mycourse">My course</a>
               </li>
+              <li><a class="dropdown-item" href="index.php?q=mybook">My book</a>
+              </li>
               <li><a class="dropdown-item" href="logout.php">Log out</a>
               </li>
           </li>
